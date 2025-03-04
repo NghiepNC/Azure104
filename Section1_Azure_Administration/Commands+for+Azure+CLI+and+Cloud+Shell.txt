@@ -1,0 +1,51 @@
+# Create VM and configuration details for deployment
+az vm create `
+--resource-group $rergp.ResourceGroupName `
+--location $rergp.Location `
+--name vm-demo-001 `
+--image UbuntuLTS `
+--admin-username demovm `
+--generate-ssh-keys `
+--no-wait
+
+-Chúng ta có thể chạy 1 lệnh để lấy một số thông tin về storage account được ánh xạ với Cloud Shell
+
+Get-cloudDrive
+Get-AzResource | Format-Table # Get all Azure resources in table format
+
+# Uncomment the below line to download the script for cleaning up the Azure cloud sandbox. Please be advised that this script is destructive.
+# Invoke-WebRequest -Uri "https://raw.githubusercontent.com/phuongluuho/Azure104/main/delete-vm.ps1" -OutFile ~/delete-vm.ps1
+
+- Chạy script để nó sẽ xóa bỏ tài nguyên 
+
+./delete-vm.ps1
+
+
+
+---------
+# 1 Create VM with Azure CLI on Cloudshell 
+
+az vm create `
+  --resource-group rg-DCIHCM-POC `
+  --name MyCheapVM-DEVOPS2 `
+  --image Ubuntu2204 `
+  --admin-username myuser `
+  --admin-password MySecureP@ssw0rd! `
+  --location westus `
+  --size Standard_B1s `
+  --public-ip-sku Standard `
+  --nsg ""
+
+Thay bien voo rooif xoas cacs thanhf phan lien qua 
+az vm delete --resource-group rg-bachan-dev --name MyCheapVM-DEVOPS2 --yes --no-wait
+az disk delete --resource-group rg-bachan-dev --name MyCheapVM-DEVOPS2_OSDisk --yes
+az network nic delete --resource-group rg-bachan-dev --name MyCheapVM-DEVOPS2-NIC
+az network public-ip delete --resource-group rg-bachan-dev --name MyCheapVM-DEVOPS2VMNic
+az network vnet delete --resource-group rg-bachan-dev --name MyCheapVM-DEVOPS2VNET
+
+==> Khong xoa duoc het
+
+
+az network vnet list --resource-group MyResourceGroup --output table
+
+
