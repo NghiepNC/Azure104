@@ -11,6 +11,7 @@ Chào mừng đến với repo **AZ-104**! 🚀 Đây là nơi mình lưu trữ 
 - ✅ Các bài lab thực hành & kinh nghiệm ôn thi  
 
 ## 📚 Tài liệu hữu ích  
+- [AZ-104 Microsoft Azure Administrator Certification- Thầy Lưu Hồ Phương](https://www.udemy.com/course/tim-hieu-am-may-azure-voi-chung-chi-az-104-microsoft-azure/?couponCode=ST10MT30325G2)
 - [Microsoft Learn - AZ-104](https://learn.microsoft.com/en-us/certifications/exams/az-104/)  
 - [Azure Documentation](https://learn.microsoft.com/en-us/azure/)  
 - [Practice Labs](https://learn.microsoft.com/en-us/training/)  
