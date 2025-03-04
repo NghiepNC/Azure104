@@ -1,0 +1,27 @@
+📦 AZ-104
+ ├── 📜 README.md             # Giới thiệu repo
+ ├── 📜 SUMMARY.md            # Mục lục repo
+ ├── 📜 LICENSE               # Giấy phép (MIT, Apache, v.v.)
+ ├── 📜 CONTRIBUTING.md       # Hướng dẫn đóng góp
+ ├── 📂 docs                  # Tài liệu hướng dẫn chi tiết
+ │   ├── 📜 01_intro.md       # Chương 1: Giới thiệu về AZ-104
+ │   ├── 📜 02_identity.md    # Chương 2: Quản lý danh tính & Azure AD
+ │   ├── 📜 03_compute.md     # Chương 3: Quản lý tài nguyên tính toán (VM, Containers)
+ │   ├── 📜 04_networking.md  # Chương 4: Quản lý mạng Azure
+ │   ├── 📜 05_storage.md     # Chương 5: Quản lý Azure Storage
+ │   ├── 📜 06_monitoring.md  # Chương 6: Giám sát & Bảo mật
+ │   ├── 📜 07_practice.md    # Chương 7: Bài lab & Kinh nghiệm ôn thi
+ │   ├── 📜 resources.md      # Nguồn tài liệu tham khảo
+ │   └── 📜 tips.md           # Mẹo và thủ thuật
+ ├── 📂 lab                   # Bài lab thực hành
+ │   ├── 📜 lab1.md           # Lab 1: Triển khai VM
+ │   ├── 📜 lab2.md           # Lab 2: Cấu hình Load Balancer
+ │   ├── 📜 lab3.md           # Lab 3: Thiết lập Azure AD
+ ├── 📂 assets                # Hình ảnh & tài liệu đi kèm
+ │   ├── architecture.png     # Hình vẽ kiến trúc
+ │   ├── network_diagram.png  # Mô hình mạng Azure
+ ├── 📂 scripts               # Script hỗ trợ học tập
+ │   ├── deploy_vm.ps1        # PowerShell script để triển khai VM
+ │   ├── setup_network.sh     # Bash script để thiết lập mạng Azure
+ ├── .gitignore               # Danh sách file cần bỏ qua khi commit
+ ├── .github/workflows        # Workflow GitHub Actions (CI/CD nếu cần)
