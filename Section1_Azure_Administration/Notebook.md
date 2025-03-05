@@ -24,3 +24,10 @@ ARM là cách mình tương tác với Azure Cloud để quản trị tất cả
 
 ## 3. Output
 Hiểu được cách để quản lý các tài nguyên của trên Azure thông qua Azure portal ,Cloudshell, Azure CLI , Azure powershell 
+
+
+## 4 Tài liệu bổ sung ARM template 
+![ARM](../assets/section1/arm_templates.png)
+
+Các thành phần chính trong ARM templates 
+![ARM](../assets/section1/arm_templates2.png)
