@@ -52,3 +52,4 @@
 🔹 **Azure AD, RBAC, Managed Identities, Conditional Access là các công cụ quan trọng.**  
 🔹 **Cần thiết lập bảo mật tốt với MFA, PIM & Identity Protection để tránh rủi ro.**  
 
+![type](../assets/section3/Active_directory.png)
