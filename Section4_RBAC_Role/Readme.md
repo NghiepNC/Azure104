@@ -62,6 +62,7 @@ Azure AD Roles kiểm soát quyền quản trị trong Azure Active Directory (q
 - **Group** (Nhóm chứa nhiều User).  
 - **Service Principal** (Ứng dụng / Service).  
 - **Managed Identity** (Dịch vụ có danh tính riêng).  
+![type](../assets/section4/RBAC.png)
 
 ### 5.2 **Role Definition (Danh sách quyền có sẵn)**  
 - Mỗi Role gồm **Actions (cho phép làm gì)** và **NotActions (cấm làm gì)**.  
@@ -75,6 +76,10 @@ Azure AD Roles kiểm soát quyền quản trị trong Azure Active Directory (q
 - **Subscription** (Quản lý nhiều Resource Groups).  
 - **Resource Group** (Nhóm tài nguyên).  
 - **Resource** (Từng tài nguyên cụ thể).  
+![type](../assets/section4/RBAC2.png)
+
+Có tính kế thừa Role theo các bậc phân cấp
+
 
 📌 **Cách hoạt động của RBAC:**  
 - Nếu một User có quyền **Owner trên Resource Group**, họ **tự động có quyền trên tất cả tài nguyên bên trong**.  
