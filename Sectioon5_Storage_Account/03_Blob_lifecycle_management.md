@@ -4,6 +4,8 @@
 **Vòng đời của Blob Storage** (Blob Lifecycle Management) cho phép tự động **di chuyển, xóa, hoặc thay đổi cấp lưu trữ (tiers)** của Blob dựa trên các quy tắc (lifecycle rules).  
 Mục tiêu là tối ưu **chi phí** và **hiệu suất**, đặc biệt với dữ liệu ít được truy cập.  
 
+
+![type](../assets/section5/lifecycle_blob.png)
 ---
 
 ## 2️⃣ Các Trạng Thái Trong Vòng Đời Của Blob  
