@@ -3,7 +3,7 @@
 ## 1️⃣ Tổng Quan Về Azure VM Disks  
 Azure cung cấp nhiều loại đĩa lưu trữ để tối ưu hóa hiệu suất và chi phí khi chạy máy ảo.   
 VHDS (Virtual Hard Disks): Ổ Ảo sử dụng hạ tầng lưu trữ dưới dạng page blobs trong dịch vụ blob
-![disk](../assets/section7/Disk1.png)
+![disk](../assets/section8/Disk1.png)
 Mục đích disk để lưu trữ và tổ chức các loại lưu trữ
 
 ✅ **Disk được quản lý (Managed Disks)**: Azure quản lý tự động  
@@ -14,7 +14,7 @@ Mục đích disk để lưu trữ và tổ chức các loại lưu trữ
 
 ## 2️⃣ Các Thành Phần Chính Của Azure VM Disk  
 
-![disk](../assets/section7/Disk2.png)
+![disk](../assets/section8/Disk2.png)
 | **Thành phần** | **Mô tả** |
 |--------------|----------|
 | **OS Disk** | Chứa hệ điều hành của VM |
@@ -27,7 +27,7 @@ Mục đích disk để lưu trữ và tổ chức các loại lưu trữ
 ---
 
 ## 3️⃣ Các Loại Managed Disks  
-![disk](../assets/section7/Disk3.png)
+![disk](../assets/section8/Disk3.png)
 
 | **Loại Disk** | **Mô tả** | **Sử dụng phổ biến** |
 |--------------|----------|----------------|
