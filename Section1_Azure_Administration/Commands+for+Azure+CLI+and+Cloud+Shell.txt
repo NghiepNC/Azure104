@@ -1,3 +1,18 @@
+1. kiểm tra subcription id
+az account list --output table
+
+
+2 Liệt kê thất cả resource trong subcription
+
+az resource list --subscription <subscription> --query "[?tags.ProjectName != null].{Resource: name, Project: tags.ProjectName,  Type: type}" --output table
+
+Kiểm tra Azure Devops 
+az resource list --subscription <subscription> --query "[?type=='microsoft.visualstudio/account'].{Resource: name, Project: tags.ProjectName, Type: type}" --output table
+
+az resource list --subscription <subscription> --query "[?name=='DCI-HCM' && tags.ProjectName != null].{Resource: name, Project: tags.ProjectName, Type: type}" --output table
+------
+
+
 # Create VM and configuration details for deployment
 az vm create `
 --resource-group $rergp.ResourceGroupName `
