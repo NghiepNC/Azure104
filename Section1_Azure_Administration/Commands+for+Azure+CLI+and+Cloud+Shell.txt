@@ -9,7 +9,7 @@ az resource list --subscription <subscription> --query "[?tags.ProjectName != nu
 Kiểm tra Azure Devops 
 az resource list --subscription <subscription> --query "[?type=='microsoft.visualstudio/account'].{Resource: name, Project: tags.ProjectName, Type: type}" --output table
 
-az resource list --subscription <subscription> --query "[?name=='DCI-HCM' && tags.ProjectName != null].{Resource: name, Project: tags.ProjectName, Type: type}" --output table
+az resource list --subscription <subscription> --query "[?name=='ABC' && tags.ProjectName != null].{Resource: name, Project: tags.ProjectName, Type: type}" --output table
 ------
 
 
