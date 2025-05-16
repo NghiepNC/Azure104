@@ -1,14 +1,14 @@
-# Azure VM Infrastructure with Terraform
+# Azure Linux VM Infrastructure with Terraform
 
-Repository này chứa mã Terraform để triển khai cơ sở hạ tầng Azure VM với các tính năng sau:
+Repository này chứa mã Terraform để triển khai cơ sở hạ tầng Azure Linux VM với các tính năng sau:
 
 ## 🚀 Tính năng
 
-- Windows Server 2022 Virtual Machine
-- Data Disk 1023GB
-- Network Security Group với rule RDP
+- Ubuntu 18.04 LTS Virtual Machine
+- Data Disk 1023GB (Standard SSD)
+- Network Security Group với rule SSH (port 22)
 - Public IP với DNS name
-- Boot diagnostics
+- Boot diagnostics với Storage Account
 - Standard SSD cho OS disk
 - Resource tagging
 - Multi-environment support (dev, staging, prod)
@@ -16,7 +16,7 @@ Repository này chứa mã Terraform để triển khai cơ sở hạ tầng Azu
 ## 📁 Cấu trúc thư mục
 
 ```
-terraform/
+terraform_az/
 ├── modules/
 │   └── vm/                    # Module chính cho VM
 │       ├── main.tf            # Resource definitions
@@ -26,6 +26,7 @@ terraform/
     └── dev/                   # Môi trường development
         ├── main.tf            # Module instantiation
         ├── variables.tf       # Environment variables
+        ├── outputs.tf         # Environment outputs
         └── terraform.tfvars   # Variable values
 ```
 
@@ -34,7 +35,6 @@ terraform/
 - [Terraform](https://www.terraform.io/downloads.html) >= 1.0.0
 - [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
 - Azure subscription
-- Azure Storage Account (cho backend state)
 
 ## 🔧 Cài đặt
 
@@ -85,12 +85,12 @@ Các biến chính có thể cấu hình trong `terraform.tfvars`:
 ```hcl
 environment        = "dev"
 location           = "eastus"
-resource_group_name = "rg-vm-demo-dev"
-vm_name            = "vm-demo-dev"
+resource_group_name = "rg-vm-demo-001"
+vm_name            = "vm-demo-001"
 admin_username     = "azureuser"
-admin_password     = "your-secure-password"
+admin_password     = "your-secure-password"  # Thay đổi trong môi trường production
 vm_size            = "Standard_B2s"
-os_version         = "2022-datacenter-azure-edition-core"
+os_version         = "18.04-LTS"
 ```
 
 ### Tags
@@ -100,18 +100,47 @@ Mặc định, các resource sẽ được gắn các tag sau:
 ```hcl
 tags = {
   Environment = "Development"
-  Project     = "Azure104"
+  Project     = "VM Demo"
   ManagedBy   = "Terraform"
   Owner       = "DevOps Team"
   CostCenter  = "IT"
 }
 ```
 
+### Outputs
+
+Sau khi triển khai, bạn có thể xem các thông tin quan trọng:
+
+```bash
+terraform output
+```
+
+Các output chính bao gồm:
+- VM ID và tên
+- Public và Private IP
+- DNS name
+- Resource Group name
+- VNet và Subnet thông tin
+- NSG thông tin
+- Data Disk thông tin
+- Storage Account thông tin
+
 ## 🔒 Bảo mật
 
-- **Mật khẩu**: Trong môi trường production, nên lưu trữ mật khẩu trong Azure Key Vault
-- **State file**: Nên sử dụng Azure Storage Account để lưu trữ state file
-- **Access Control**: Sử dụng Azure RBAC để kiểm soát quyền truy cập
+- **Mật khẩu**: 
+  - Trong môi trường production, sử dụng Azure Key Vault
+  - Không lưu trữ mật khẩu trong code
+  - Sử dụng mật khẩu mạnh và thay đổi định kỳ
+
+- **Network Security**:
+  - NSG chỉ mở port 22 cho SSH
+  - Cân nhắc sử dụng Azure Bastion
+  - Giới hạn source IP trong NSG rules
+
+- **Access Control**:
+  - Sử dụng Azure RBAC
+  - Áp dụng principle of least privilege
+  - Enable encryption cho tất cả resources
 
 ## 🧹 Dọn dẹp
 
@@ -129,19 +158,20 @@ terraform destroy
    - Sử dụng `.gitignore` để loại trừ các file không cần thiết
 
 2. **State Management**:
-   - Sử dụng remote state
+   - Sử dụng remote state (Azure Storage Account)
    - Bật state locking
    - Backup state file thường xuyên
 
 3. **Security**:
    - Sử dụng Azure Key Vault cho secrets
-   - Áp dụng principle of least privilege
    - Enable encryption cho tất cả resources
+   - Regular security updates
 
 4. **Cost Management**:
    - Sử dụng tags để theo dõi chi phí
    - Tắt resources khi không sử dụng
    - Chọn đúng kích thước VM
+   - Monitor resource usage
 
 ## 🤝 Contributing
 
