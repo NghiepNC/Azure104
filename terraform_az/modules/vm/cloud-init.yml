@@ -1,0 +1,99 @@
+#cloud-config
+package_update: true
+package_upgrade: true
+
+packages:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - software-properties-common
+  - unzip
+
+# Add user to docker group
+users:
+  - name: ${admin_username}
+    groups: [docker]
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+
+runcmd:
+  # Install Docker
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+  - add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  - apt-get update
+  - apt-get install -y docker-ce docker-ce-cli containerd.io
+  - systemctl enable docker
+  - systemctl start docker
+  # Add current user to docker group
+  - usermod -aG docker ${admin_username}
+
+  # Install Docker Compose
+  - curl -L "https://github.com/docker/compose/releases/download/v2.24.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  - chmod +x /usr/local/bin/docker-compose
+
+  # Create docker-compose file for MongoDB and MySQL
+  - mkdir -p /opt/docker
+  - |
+    cat > /opt/docker/docker-compose.yml << 'EOF'
+    version: '3.8'
+    services:
+      mongodb:
+        image: mongo:latest
+        container_name: mongodb
+        restart: always
+        ports:
+          - "27017:27017"
+        volumes:
+          - mongodb_data:/data/db
+        environment:
+          - MONGO_INITDB_ROOT_USERNAME=admin
+          - MONGO_INITDB_ROOT_PASSWORD=password123
+
+      mysql:
+        image: mysql:8.0
+        container_name: mysql
+        restart: always
+        ports:
+          - "3306:3306"
+        environment:
+          - MYSQL_ROOT_PASSWORD=rootpassword
+          - MYSQL_DATABASE=mydb
+          - MYSQL_USER=myuser
+          - MYSQL_PASSWORD=mypassword
+        volumes:
+          - mysql_data:/var/lib/mysql
+        command: --default-authentication-plugin=mysql_native_password
+
+    volumes:
+      mongodb_data:
+      mysql_data:
+    EOF
+
+  # Start services
+  - cd /opt/docker && docker-compose up -d
+
+write_files:
+  - path: /etc/systemd/system/docker-services.service
+    content: |
+      [Unit]
+      Description=Docker Services (MongoDB and MySQL)
+      After=docker.service
+      Requires=docker.service
+
+      [Service]
+      Type=oneshot
+      RemainAfterExit=yes
+      WorkingDirectory=/opt/docker
+      ExecStart=/usr/local/bin/docker-compose up -d
+      ExecStop=/usr/local/bin/docker-compose down
+      TimeoutStartSec=0
+
+      [Install]
+      WantedBy=multi-user.target
+    permissions: '0644'
+
+  - path: /etc/systemd/system/docker-services.service.d/override.conf
+    content: |
+      [Service]
+      ExecStart=
+      ExecStart=/usr/local/bin/docker-compose up -d
+    permissions: '0644' 
